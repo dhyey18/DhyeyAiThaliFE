@@ -3,6 +3,7 @@ import { Upload, Image as ImageIcon } from 'lucide-react';
 
 const UploadSection = ({ onImageSelect, onAnalyze, selectedImage, loading }) => {
   const [dragActive, setDragActive] = useState(false);
+  const [dietaryPreference, setDietaryPreference] = useState('Standard');
   const fileInputRef = useRef(null);
 
   const handleDrag = (e) => {
@@ -40,7 +41,7 @@ const UploadSection = ({ onImageSelect, onAnalyze, selectedImage, loading }) => 
 
   const handleAnalyzeClick = () => {
     if (selectedImage) {
-      onAnalyze(selectedImage);
+      onAnalyze(selectedImage, dietaryPreference);
     }
   };
 
@@ -48,6 +49,22 @@ const UploadSection = ({ onImageSelect, onAnalyze, selectedImage, loading }) => 
 
   return (
     <div className="space-y-6">
+      <div className="bg-white rounded-xl shadow-sm p-4 border border-gray-200">
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          Dietary Preference
+        </label>
+        <select
+          value={dietaryPreference}
+          onChange={(e) => setDietaryPreference(e.target.value)}
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+        >
+          <option value="Standard">Standard</option>
+          <option value="Jain">Jain</option>
+          <option value="Vegan">Vegan</option>
+          <option value="Keto">Keto</option>
+          <option value="High Protein">High Protein</option>
+        </select>
+      </div>
       <div
         className={`relative border-2 border-dashed rounded-xl p-8 transition-all ${
           dragActive

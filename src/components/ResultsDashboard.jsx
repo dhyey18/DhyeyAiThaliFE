@@ -1,6 +1,48 @@
-import { Activity, Zap, Apple } from 'lucide-react';
+import { Activity, Zap, Apple, Save, Download, Share2 } from 'lucide-react';
+import axios from 'axios';
+import { API_BASE } from '../config';
 
-const ResultsDashboard = ({ data, loading }) => {
+const ResultsDashboard = ({ data, loading, onSave }) => {
+
+  const handleSave = async () => {
+    if (!data) return;
+    try {
+      await axios.post(`${API_BASE}/meals`, data);
+      if (onSave) onSave();
+      alert('Meal saved successfully!');
+    } catch (error) {
+      console.error('Error saving meal:', error);
+      alert('Failed to save meal');
+    }
+  };
+
+  const handleExport = () => {
+    if (!data) return;
+    const dataStr = JSON.stringify(data, null, 2);
+    const dataBlob = new Blob([dataStr], { type: 'application/json' });
+    const url = URL.createObjectURL(dataBlob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `thali-analysis-${Date.now()}.json`;
+    link.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const handleShare = async () => {
+    if (!data) return;
+    const shareText = `My Thali Analysis:\nCalories: ${data.total_calories?.toFixed(0) || 0} kcal\nProtein: ${data.macros_summary?.protein?.toFixed(1) || 0}g\nCarbs: ${data.macros_summary?.carbs?.toFixed(1) || 0}g\nFats: ${data.macros_summary?.fats?.toFixed(1) || 0}g`;
+    
+    if (navigator.share) {
+      try {
+        await navigator.share({ text: shareText });
+      } catch (error) {
+        console.error('Error sharing:', error);
+      }
+    } else {
+      navigator.clipboard.writeText(shareText);
+      alert('Results copied to clipboard!');
+    }
+  };
   if (loading) {
     return (
       <div className="space-y-6">
@@ -38,9 +80,38 @@ const ResultsDashboard = ({ data, loading }) => {
   return (
     <div className="space-y-6">
       <div className="bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl shadow-lg p-6 text-white">
-        <h2 className="text-2xl font-bold mb-2">Total Calories</h2>
-        <p className="text-5xl font-bold">{total_calories.toFixed(0)}</p>
-        <p className="text-orange-100 mt-2">kcal</p>
+        <div className="flex items-start justify-between">
+          <div>
+            <h2 className="text-2xl font-bold mb-2">Total Calories</h2>
+            <p className="text-5xl font-bold">{total_calories.toFixed(0)}</p>
+            <p className="text-orange-100 mt-2">kcal</p>
+          </div>
+          {data && (
+            <div className="flex gap-2">
+              <button
+                onClick={handleSave}
+                className="p-2 bg-white/20 hover:bg-white/30 rounded-lg transition-colors"
+                title="Save Meal"
+              >
+                <Save className="w-5 h-5" />
+              </button>
+              <button
+                onClick={handleExport}
+                className="p-2 bg-white/20 hover:bg-white/30 rounded-lg transition-colors"
+                title="Export JSON"
+              >
+                <Download className="w-5 h-5" />
+              </button>
+              <button
+                onClick={handleShare}
+                className="p-2 bg-white/20 hover:bg-white/30 rounded-lg transition-colors"
+                title="Share"
+              >
+                <Share2 className="w-5 h-5" />
+              </button>
+            </div>
+          )}
+        </div>
       </div>
 
       <div className="grid grid-cols-3 gap-4">
