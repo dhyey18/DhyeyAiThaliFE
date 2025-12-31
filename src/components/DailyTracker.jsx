@@ -99,16 +99,16 @@ const DailyTracker = ({ meals = [] }) => {
   );
 
   return (
-    <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-          <Target className="w-6 h-6 text-green-600" />
+    <div className="bg-white rounded-xl shadow-sm p-4 sm:p-6 border border-gray-200">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-0 mb-4 sm:mb-6">
+        <h2 className="text-xl sm:text-2xl font-bold text-gray-900 flex items-center gap-2">
+          <Target className="w-5 h-5 sm:w-6 sm:h-6 text-green-600" />
           Daily Nutrition Goals
         </h2>
         {!editing ? (
           <button
             onClick={() => setEditing(true)}
-            className="flex items-center gap-2 px-3 py-1 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
+            className="flex items-center justify-center gap-2 px-3 py-2 sm:py-1 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors text-sm sm:text-base touch-manipulation"
           >
             <Edit2 className="w-4 h-4" />
             Edit Goals
@@ -116,7 +116,7 @@ const DailyTracker = ({ meals = [] }) => {
         ) : (
           <button
             onClick={saveGoals}
-            className="flex items-center gap-2 px-3 py-1 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+            className="flex items-center justify-center gap-2 px-3 py-2 sm:py-1 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm sm:text-base touch-manipulation"
           >
             <Save className="w-4 h-4" />
             Save
@@ -126,7 +126,7 @@ const DailyTracker = ({ meals = [] }) => {
 
       {editing ? (
         <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Calories (kcal)
@@ -135,7 +135,7 @@ const DailyTracker = ({ meals = [] }) => {
                 type="number"
                 value={tempGoals.calories}
                 onChange={(e) => setTempGoals({ ...tempGoals, calories: parseInt(e.target.value) })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
+                className="w-full px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
               />
             </div>
             <div>
@@ -146,7 +146,7 @@ const DailyTracker = ({ meals = [] }) => {
                 type="number"
                 value={tempGoals.protein}
                 onChange={(e) => setTempGoals({ ...tempGoals, protein: parseInt(e.target.value) })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
+                className="w-full px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
               />
             </div>
             <div>
@@ -157,7 +157,7 @@ const DailyTracker = ({ meals = [] }) => {
                 type="number"
                 value={tempGoals.carbs}
                 onChange={(e) => setTempGoals({ ...tempGoals, carbs: parseInt(e.target.value) })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
+                className="w-full px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
               />
             </div>
             <div>
@@ -168,7 +168,7 @@ const DailyTracker = ({ meals = [] }) => {
                 type="number"
                 value={tempGoals.fats}
                 onChange={(e) => setTempGoals({ ...tempGoals, fats: parseInt(e.target.value) })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
+                className="w-full px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
               />
             </div>
           </div>
@@ -177,13 +177,13 @@ const DailyTracker = ({ meals = [] }) => {
               setTempGoals(goals);
               setEditing(false);
             }}
-            className="w-full px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200"
+            className="w-full px-4 py-2 text-sm sm:text-base bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 touch-manipulation"
           >
             Cancel
           </button>
         </div>
       ) : (
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6">
           <ProgressBar
             label="Calories"
             consumed={progress.consumed.calories}

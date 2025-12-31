@@ -94,39 +94,40 @@ const Dashboard = () => {
             <p className="text-sm mt-2">Start analyzing meals to see your nutrition trends</p>
           </div>
         ) : (
-          <>
-            <div className="mb-8">
-              <h3 className="text-lg font-semibold text-gray-700 mb-4 flex items-center gap-2">
-                <Utensils className="w-5 h-5" />
+            <>
+            <div className="mb-6 sm:mb-8">
+              <h3 className="text-base sm:text-lg font-semibold text-gray-700 mb-3 sm:mb-4 flex items-center gap-2">
+                <Utensils className="w-4 h-4 sm:w-5 sm:h-5" />
                 Daily Calories vs Goal
               </h3>
-              <ResponsiveContainer width="100%" height={300}>
-                <BarChart data={dailyCaloriesData}>
+              <ResponsiveContainer width="100%" height={250} className="sm:h-[300px]">
+                <BarChart data={dailyCaloriesData} margin={{ top: 5, right: 5, left: 0, bottom: 5 }}>
                   <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="date" />
-                  <YAxis />
+                  <XAxis dataKey="date" tick={{ fontSize: 12 }} />
+                  <YAxis tick={{ fontSize: 12 }} />
                   <Tooltip />
-                  <Legend />
-                  <Bar dataKey="calories" fill="#f97316" name="Calories Consumed" />
-                  <Bar dataKey="goal" fill="#e5e7eb" name="Daily Goal (2000)" />
+                  <Legend wrapperStyle={{ fontSize: '12px' }} />
+                  <Bar dataKey="calories" fill="#f97316" name="Calories" />
+                  <Bar dataKey="goal" fill="#e5e7eb" name="Goal (2000)" />
                 </BarChart>
               </ResponsiveContainer>
             </div>
 
             {todayMacrosData.length > 0 && (
               <div>
-                <h3 className="text-lg font-semibold text-gray-700 mb-4">
+                <h3 className="text-base sm:text-lg font-semibold text-gray-700 mb-3 sm:mb-4">
                   Today's Macronutrient Split
                 </h3>
-                <ResponsiveContainer width="100%" height={300}>
+                <ResponsiveContainer width="100%" height={250} className="sm:h-[300px]">
                   <PieChart>
                     <Pie
                       data={todayMacrosData}
                       cx="50%"
                       cy="50%"
                       labelLine={false}
-                      label={({ name, value, percent }) => `${name}: ${value}g (${(percent * 100).toFixed(1)}%)`}
-                      outerRadius={100}
+                      label={({ name, value, percent }) => `${name}: ${value}g`}
+                      outerRadius={80}
+                      className="sm:outerRadius-100"
                       fill="#8884d8"
                       dataKey="value"
                     >
@@ -143,63 +144,64 @@ const Dashboard = () => {
         )}
       </div>
 
-      <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
-        <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-          <Calendar className="w-5 h-5 text-orange-600" />
+      <div className="bg-white rounded-xl shadow-sm p-4 sm:p-6 border border-gray-200">
+        <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4 flex items-center gap-2">
+          <Calendar className="w-4 h-4 sm:w-5 sm:h-5 text-orange-600" />
           Recent Meal History
         </h3>
         {meals.length === 0 ? (
-          <div className="text-center py-8 text-gray-500">
-            <p>No meals found</p>
+          <div className="text-center py-6 sm:py-8 text-gray-500">
+            <p className="text-sm sm:text-base">No meals found</p>
           </div>
         ) : (
-          <div className="space-y-3 max-h-96 overflow-y-auto">
+          <div className="space-y-2 sm:space-y-3 max-h-96 overflow-y-auto">
             {meals.slice(0, 10).map((meal) => (
               <div
                 key={meal.id}
-                className="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors"
+                className="border border-gray-200 rounded-lg p-3 sm:p-4 hover:bg-gray-50 transition-colors"
               >
                 <div className="flex items-start justify-between">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-2">
-                      <span className="text-sm font-medium text-gray-600">
+                  <div className="flex-1 min-w-0">
+                    <div className="flex flex-wrap items-center gap-2 mb-2">
+                      <span className="text-xs sm:text-sm font-medium text-gray-600">
                         {format(new Date(meal.timestamp || meal.createdAt), 'MMM dd, yyyy HH:mm')}
                       </span>
-                      <span className="px-2 py-1 bg-orange-100 text-orange-700 rounded text-xs font-medium">
+                      <span className="px-2 py-0.5 sm:py-1 bg-orange-100 text-orange-700 rounded text-xs font-medium whitespace-nowrap">
                         {meal.mealType || 'Meal'}
                       </span>
                       {meal.dietaryPreference && meal.dietaryPreference !== 'Standard' && (
-                        <span className="px-2 py-1 bg-green-100 text-green-700 rounded text-xs font-medium">
+                        <span className="px-2 py-0.5 sm:py-1 bg-green-100 text-green-700 rounded text-xs font-medium whitespace-nowrap">
                           {meal.dietaryPreference}
                         </span>
                       )}
                     </div>
-                    <div className="flex items-center gap-4 mb-2">
-                      <span className="text-xl font-bold text-orange-600">
+                    <div className="flex flex-wrap items-center gap-3 sm:gap-4 mb-2">
+                      <span className="text-lg sm:text-xl font-bold text-orange-600">
                         {meal.total_calories?.toFixed(0) || 0} kcal
                       </span>
-                      <span className="text-sm text-gray-600">
+                      <span className="text-xs sm:text-sm text-gray-600">
                         {meal.items?.length || 0} items
                       </span>
                     </div>
-                    <div className="flex gap-4 text-xs text-gray-500">
+                    <div className="flex flex-wrap gap-3 sm:gap-4 text-xs text-gray-500">
                       <span>P: {meal.macros_summary?.protein?.toFixed(1) || 0}g</span>
                       <span>C: {meal.macros_summary?.carbs?.toFixed(1) || 0}g</span>
                       <span>F: {meal.macros_summary?.fats?.toFixed(1) || 0}g</span>
                     </div>
                     {meal.items && meal.items.length > 0 && (
                       <div className="mt-2 flex flex-wrap gap-1">
-                        {meal.items.slice(0, 4).map((item, idx) => (
+                        {meal.items.slice(0, 3).map((item, idx) => (
                           <span
                             key={idx}
-                            className="px-2 py-1 bg-orange-100 text-orange-700 rounded text-xs"
+                            className="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-orange-100 text-orange-700 rounded text-xs truncate max-w-[120px] sm:max-w-none"
+                            title={item.name}
                           >
                             {item.name}
                           </span>
                         ))}
-                        {meal.items.length > 4 && (
-                          <span className="px-2 py-1 bg-gray-100 text-gray-600 rounded text-xs">
-                            +{meal.items.length - 4} more
+                        {meal.items.length > 3 && (
+                          <span className="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-gray-100 text-gray-600 rounded text-xs">
+                            +{meal.items.length - 3} more
                           </span>
                         )}
                       </div>

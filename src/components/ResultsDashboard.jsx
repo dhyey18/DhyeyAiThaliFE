@@ -78,71 +78,71 @@ const ResultsDashboard = ({ data, loading, onSave }) => {
   const { items = [], total_calories = 0, macros_summary = {}, advice = '' } = data;
 
   return (
-    <div className="space-y-6">
-      <div className="bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl shadow-lg p-6 text-white">
+    <div className="space-y-4 sm:space-y-6">
+      <div className="bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl shadow-lg p-4 sm:p-6 text-white">
         <div className="flex items-start justify-between">
-          <div>
-            <h2 className="text-2xl font-bold mb-2">Total Calories</h2>
-            <p className="text-5xl font-bold">{total_calories.toFixed(0)}</p>
-            <p className="text-orange-100 mt-2">kcal</p>
+          <div className="flex-1 min-w-0">
+            <h2 className="text-xl sm:text-2xl font-bold mb-1 sm:mb-2">Total Calories</h2>
+            <p className="text-4xl sm:text-5xl font-bold">{total_calories.toFixed(0)}</p>
+            <p className="text-orange-100 mt-1 sm:mt-2 text-sm sm:text-base">kcal</p>
           </div>
           {data && (
-            <div className="flex gap-2">
+            <div className="flex gap-1.5 sm:gap-2 ml-2 flex-shrink-0">
               <button
                 onClick={handleSave}
-                className="p-2 bg-white/20 hover:bg-white/30 rounded-lg transition-colors"
+                className="p-1.5 sm:p-2 bg-white/20 hover:bg-white/30 rounded-lg transition-colors touch-manipulation"
                 title="Save Meal"
               >
-                <Save className="w-5 h-5" />
+                <Save className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
               <button
                 onClick={handleExport}
-                className="p-2 bg-white/20 hover:bg-white/30 rounded-lg transition-colors"
+                className="p-1.5 sm:p-2 bg-white/20 hover:bg-white/30 rounded-lg transition-colors touch-manipulation"
                 title="Export JSON"
               >
-                <Download className="w-5 h-5" />
+                <Download className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
               <button
                 onClick={handleShare}
-                className="p-2 bg-white/20 hover:bg-white/30 rounded-lg transition-colors"
+                className="p-1.5 sm:p-2 bg-white/20 hover:bg-white/30 rounded-lg transition-colors touch-manipulation"
                 title="Share"
               >
-                <Share2 className="w-5 h-5" />
+                <Share2 className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
             </div>
           )}
         </div>
       </div>
 
-      <div className="grid grid-cols-3 gap-4">
-        <div className="bg-white rounded-xl shadow-sm p-4 border border-gray-200">
-          <div className="flex items-center gap-2 mb-2">
-            <Activity className="w-5 h-5 text-orange-600" />
-            <h3 className="text-sm font-medium text-gray-600">Protein</h3>
+      <div className="grid grid-cols-3 gap-2 sm:gap-4">
+        <div className="bg-white rounded-xl shadow-sm p-3 sm:p-4 border border-gray-200">
+          <div className="flex items-center gap-1.5 sm:gap-2 mb-1 sm:mb-2">
+            <Activity className="w-4 h-4 sm:w-5 sm:h-5 text-orange-600 flex-shrink-0" />
+            <h3 className="text-xs sm:text-sm font-medium text-gray-600 truncate">Protein</h3>
           </div>
-          <p className="text-2xl font-bold text-gray-900">
+          <p className="text-xl sm:text-2xl font-bold text-gray-900">
             {macros_summary.protein?.toFixed(1) || '0.0'}
           </p>
           <p className="text-xs text-gray-500">grams</p>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm p-4 border border-gray-200">
-          <div className="flex items-center gap-2 mb-2">
-            <Zap className="w-5 h-5 text-green-600" />
-            <h3 className="text-sm font-medium text-gray-600">Carbs</h3>
+        <div className="bg-white rounded-xl shadow-sm p-3 sm:p-4 border border-gray-200">
+          <div className="flex items-center gap-1.5 sm:gap-2 mb-1 sm:mb-2">
+            <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-green-600 flex-shrink-0" />
+            <h3 className="text-xs sm:text-sm font-medium text-gray-600 truncate">Carbs</h3>
           </div>
-          <p className="text-2xl font-bold text-gray-900">
+          <p className="text-xl sm:text-2xl font-bold text-gray-900">
             {macros_summary.carbs?.toFixed(1) || '0.0'}
           </p>
           <p className="text-xs text-gray-500">grams</p>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm p-4 border border-gray-200">
-          <div className="flex items-center gap-2 mb-2">
-            <Apple className="w-5 h-5 text-orange-500" />
-            <h3 className="text-sm font-medium text-gray-600">Fats</h3>
+        <div className="bg-white rounded-xl shadow-sm p-3 sm:p-4 border border-gray-200">
+          <div className="flex items-center gap-1.5 sm:gap-2 mb-1 sm:mb-2">
+            <Apple className="w-4 h-4 sm:w-5 sm:h-5 text-orange-500 flex-shrink-0" />
+            <h3 className="text-xs sm:text-sm font-medium text-gray-600 truncate">Fats</h3>
           </div>
-          <p className="text-2xl font-bold text-gray-900">
+          <p className="text-xl sm:text-2xl font-bold text-gray-900">
             {macros_summary.fats?.toFixed(1) || '0.0'}
           </p>
           <p className="text-xs text-gray-500">grams</p>
@@ -150,42 +150,44 @@ const ResultsDashboard = ({ data, loading, onSave }) => {
       </div>
 
       {items && items.length > 0 && (
-        <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
-          <h3 className="text-xl font-bold text-gray-900 mb-4">Food Items</h3>
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="border-b border-gray-200">
-                  <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">Item</th>
-                  <th className="text-right py-3 px-4 text-sm font-semibold text-gray-700">Calories</th>
-                  <th className="text-right py-3 px-4 text-sm font-semibold text-gray-700">Protein</th>
-                  <th className="text-right py-3 px-4 text-sm font-semibold text-gray-700">Carbs</th>
-                  <th className="text-right py-3 px-4 text-sm font-semibold text-gray-700">Fats</th>
-                </tr>
-              </thead>
-              <tbody>
-                {items.map((item, index) => (
-                  <tr key={index} className="border-b border-gray-100 hover:bg-gray-50">
-                    <td className="py-3 px-4 text-sm font-medium text-gray-900">{item.name}</td>
-                    <td className="py-3 px-4 text-sm text-gray-700 text-right">{item.calories?.toFixed(0) || '0'}</td>
-                    <td className="py-3 px-4 text-sm text-gray-700 text-right">{item.protein?.toFixed(1) || '0.0'}g</td>
-                    <td className="py-3 px-4 text-sm text-gray-700 text-right">{item.carbs?.toFixed(1) || '0.0'}g</td>
-                    <td className="py-3 px-4 text-sm text-gray-700 text-right">{item.fats?.toFixed(1) || '0.0'}g</td>
+        <div className="bg-white rounded-xl shadow-sm p-4 sm:p-6 border border-gray-200">
+          <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4">Food Items</h3>
+          <div className="overflow-x-auto -mx-4 sm:mx-0">
+            <div className="inline-block min-w-full align-middle px-4 sm:px-0">
+              <table className="min-w-full divide-y divide-gray-200">
+                <thead>
+                  <tr className="border-b border-gray-200">
+                    <th className="text-left py-2 sm:py-3 px-2 sm:px-4 text-xs sm:text-sm font-semibold text-gray-700">Item</th>
+                    <th className="text-right py-2 sm:py-3 px-2 sm:px-4 text-xs sm:text-sm font-semibold text-gray-700">Cal</th>
+                    <th className="text-right py-2 sm:py-3 px-2 sm:px-4 text-xs sm:text-sm font-semibold text-gray-700">P</th>
+                    <th className="text-right py-2 sm:py-3 px-2 sm:px-4 text-xs sm:text-sm font-semibold text-gray-700">C</th>
+                    <th className="text-right py-2 sm:py-3 px-2 sm:px-4 text-xs sm:text-sm font-semibold text-gray-700">F</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody className="divide-y divide-gray-100">
+                  {items.map((item, index) => (
+                    <tr key={index} className="hover:bg-gray-50">
+                      <td className="py-2 sm:py-3 px-2 sm:px-4 text-xs sm:text-sm font-medium text-gray-900">{item.name}</td>
+                      <td className="py-2 sm:py-3 px-2 sm:px-4 text-xs sm:text-sm text-gray-700 text-right">{item.calories?.toFixed(0) || '0'}</td>
+                      <td className="py-2 sm:py-3 px-2 sm:px-4 text-xs sm:text-sm text-gray-700 text-right">{item.protein?.toFixed(1) || '0.0'}g</td>
+                      <td className="py-2 sm:py-3 px-2 sm:px-4 text-xs sm:text-sm text-gray-700 text-right">{item.carbs?.toFixed(1) || '0.0'}g</td>
+                      <td className="py-2 sm:py-3 px-2 sm:px-4 text-xs sm:text-sm text-gray-700 text-right">{item.fats?.toFixed(1) || '0.0'}g</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       )}
 
       {advice && (
-        <div className="bg-gradient-to-r from-green-50 to-orange-50 rounded-xl shadow-sm p-6 border border-green-200">
-          <h3 className="text-lg font-bold text-gray-900 mb-2 flex items-center gap-2">
+        <div className="bg-gradient-to-r from-green-50 to-orange-50 rounded-xl shadow-sm p-4 sm:p-6 border border-green-200">
+          <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-2 flex items-center gap-2">
             <span className="text-green-600">💡</span>
             AI Nutrition Advice
           </h3>
-          <p className="text-gray-700 leading-relaxed">{advice}</p>
+          <p className="text-sm sm:text-base text-gray-700 leading-relaxed">{advice}</p>
         </div>
       )}
     </div>

@@ -75,10 +75,10 @@ const MealHistory = ({ onSelectMeal }) => {
   }
 
   return (
-    <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-          <Clock className="w-6 h-6 text-orange-600" />
+    <div className="bg-white rounded-xl shadow-sm p-4 sm:p-6 border border-gray-200">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-0 mb-4 sm:mb-6">
+        <h2 className="text-xl sm:text-2xl font-bold text-gray-900 flex items-center gap-2">
+          <Clock className="w-5 h-5 sm:w-6 sm:h-6 text-orange-600" />
           Meal History
         </h2>
         <div className="flex gap-2">
@@ -86,12 +86,12 @@ const MealHistory = ({ onSelectMeal }) => {
             type="date"
             value={filterDate}
             onChange={(e) => setFilterDate(e.target.value)}
-            className="px-3 py-1 border border-gray-300 rounded-lg text-sm"
+            className="px-2 sm:px-3 py-1.5 sm:py-1 border border-gray-300 rounded-lg text-xs sm:text-sm flex-1 sm:flex-none"
           />
           {filterDate && (
             <button
               onClick={() => setFilterDate('')}
-              className="px-3 py-1 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 text-sm"
+              className="px-2 sm:px-3 py-1.5 sm:py-1 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 text-xs sm:text-sm whitespace-nowrap"
             >
               Clear
             </button>
@@ -106,7 +106,7 @@ const MealHistory = ({ onSelectMeal }) => {
           placeholder="Search meals..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+          className="w-full pl-10 pr-4 py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
         />
       </div>
 
@@ -117,28 +117,28 @@ const MealHistory = ({ onSelectMeal }) => {
           {searchTerm && <p className="text-sm mt-2">Try a different search term</p>}
         </div>
       ) : (
-        <div className="space-y-3 max-h-96 overflow-y-auto">
+        <div className="space-y-2 sm:space-y-3 max-h-96 overflow-y-auto">
           {filteredMeals.map((meal) => (
             <div
               key={meal.id}
-              className="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+              className="border border-gray-200 rounded-lg p-3 sm:p-4 hover:bg-gray-50 transition-colors cursor-pointer touch-manipulation"
               onClick={() => onSelectMeal && onSelectMeal(meal)}
             >
-              <div className="flex items-start justify-between">
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Calendar className="w-4 h-4 text-gray-400" />
-                    <span className="text-sm text-gray-600">{formatDate(meal.createdAt)}</span>
+              <div className="flex items-start justify-between gap-2">
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 mb-1 sm:mb-2">
+                    <Calendar className="w-3 h-3 sm:w-4 sm:h-4 text-gray-400 flex-shrink-0" />
+                    <span className="text-xs sm:text-sm text-gray-600 truncate">{formatDate(meal.createdAt)}</span>
                   </div>
-                  <div className="flex items-center gap-4 mb-2">
-                    <span className="text-lg font-bold text-orange-600">
+                  <div className="flex flex-wrap items-center gap-2 sm:gap-4 mb-1 sm:mb-2">
+                    <span className="text-base sm:text-lg font-bold text-orange-600">
                       {meal.total_calories?.toFixed(0) || 0} kcal
                     </span>
-                    <span className="text-sm text-gray-600">
+                    <span className="text-xs sm:text-sm text-gray-600">
                       {meal.items?.length || 0} items
                     </span>
                   </div>
-                  <div className="flex gap-4 text-xs text-gray-500">
+                  <div className="flex flex-wrap gap-3 sm:gap-4 text-xs text-gray-500">
                     <span>P: {meal.macros_summary?.protein?.toFixed(1) || 0}g</span>
                     <span>C: {meal.macros_summary?.carbs?.toFixed(1) || 0}g</span>
                     <span>F: {meal.macros_summary?.fats?.toFixed(1) || 0}g</span>
@@ -148,13 +148,14 @@ const MealHistory = ({ onSelectMeal }) => {
                       {meal.items.slice(0, 3).map((item, idx) => (
                         <span
                           key={idx}
-                          className="px-2 py-1 bg-orange-100 text-orange-700 rounded text-xs"
+                          className="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-orange-100 text-orange-700 rounded text-xs truncate max-w-[100px] sm:max-w-none"
+                          title={item.name}
                         >
                           {item.name}
                         </span>
                       ))}
                       {meal.items.length > 3 && (
-                        <span className="px-2 py-1 bg-gray-100 text-gray-600 rounded text-xs">
+                        <span className="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-gray-100 text-gray-600 rounded text-xs">
                           +{meal.items.length - 3} more
                         </span>
                       )}
@@ -166,7 +167,7 @@ const MealHistory = ({ onSelectMeal }) => {
                     e.stopPropagation();
                     deleteMeal(meal.id);
                   }}
-                  className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                  className="p-1.5 sm:p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors flex-shrink-0 touch-manipulation"
                 >
                   <Trash2 className="w-4 h-4" />
                 </button>
