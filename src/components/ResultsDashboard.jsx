@@ -46,19 +46,19 @@ const ResultsDashboard = ({ data, loading, onSave }) => {
   if (loading) {
     return (
       <div className="space-y-6">
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 border border-gray-200 dark:border-gray-700 transition-colors">
+        <div className="card p-6">
           <div className="animate-pulse space-y-4">
-            <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/2"></div>
-            <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4"></div>
-            <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/2"></div>
+            <div className="h-8 bg-neutral-200 dark:bg-neutral-700 rounded-xl w-1/2"></div>
+            <div className="h-4 bg-neutral-200 dark:bg-neutral-700 rounded-lg w-3/4"></div>
+            <div className="h-4 bg-neutral-200 dark:bg-neutral-700 rounded-lg w-1/2"></div>
           </div>
         </div>
         <div className="grid grid-cols-3 gap-4">
           {[1, 2, 3].map((i) => (
-            <div key={i} className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-4 border border-gray-200 dark:border-gray-700 transition-colors">
+            <div key={i} className="card p-4">
               <div className="animate-pulse">
-                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/2 mb-2"></div>
-                <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-3/4"></div>
+                <div className="h-4 bg-neutral-200 dark:bg-neutral-700 rounded-lg w-1/2 mb-2"></div>
+                <div className="h-8 bg-neutral-200 dark:bg-neutral-700 rounded-lg w-3/4"></div>
               </div>
             </div>
           ))}
@@ -69,8 +69,8 @@ const ResultsDashboard = ({ data, loading, onSave }) => {
 
   if (!data) {
     return (
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8 border border-gray-200 dark:border-gray-700 text-center transition-colors">
-        <p className="text-gray-500 dark:text-gray-400">Upload an image to see nutrition analysis</p>
+      <div className="card p-12 text-center">
+        <p className="text-neutral-500 dark:text-neutral-400">Upload an image to see nutrition analysis</p>
       </div>
     );
   }
@@ -78,100 +78,100 @@ const ResultsDashboard = ({ data, loading, onSave }) => {
   const { items = [], total_calories = 0, macros_summary = {}, advice = '' } = data;
 
   return (
-    <div className="space-y-4 sm:space-y-6">
-      <div className="bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl shadow-lg p-4 sm:p-6 text-white">
+    <div className="space-y-6">
+      <div className="bg-gradient-to-br from-primary-500 to-primary-600 rounded-2xl shadow-large p-6 sm:p-8 text-white card-hover">
         <div className="flex items-start justify-between">
           <div className="flex-1 min-w-0">
-            <h2 className="text-xl sm:text-2xl font-bold mb-1 sm:mb-2">Total Calories</h2>
-            <p className="text-4xl sm:text-5xl font-bold">{total_calories.toFixed(0)}</p>
-            <p className="text-orange-100 mt-1 sm:mt-2 text-sm sm:text-base">kcal</p>
+            <h2 className="text-xl sm:text-2xl font-bold mb-2">Total Calories</h2>
+            <p className="text-5xl sm:text-6xl font-bold mb-2">{total_calories.toFixed(0)}</p>
+            <p className="text-primary-100 text-base">kcal</p>
           </div>
           {data && (
-            <div className="flex gap-1.5 sm:gap-2 ml-2 flex-shrink-0">
+            <div className="flex gap-2 ml-4 flex-shrink-0">
               <button
                 onClick={handleSave}
-                className="p-1.5 sm:p-2 bg-white/20 hover:bg-white/30 rounded-lg transition-colors touch-manipulation"
+                className="p-2 bg-white/20 hover:bg-white/30 rounded-xl transition-all duration-200 hover:scale-110 active:scale-95 touch-manipulation"
                 title="Save Meal"
               >
-                <Save className="w-4 h-4 sm:w-5 sm:h-5" />
+                <Save className="w-5 h-5" />
               </button>
               <button
                 onClick={handleExport}
-                className="p-1.5 sm:p-2 bg-white/20 hover:bg-white/30 rounded-lg transition-colors touch-manipulation"
+                className="p-2 bg-white/20 hover:bg-white/30 rounded-xl transition-all duration-200 hover:scale-110 active:scale-95 touch-manipulation"
                 title="Export JSON"
               >
-                <Download className="w-4 h-4 sm:w-5 sm:h-5" />
+                <Download className="w-5 h-5" />
               </button>
               <button
                 onClick={handleShare}
-                className="p-1.5 sm:p-2 bg-white/20 hover:bg-white/30 rounded-lg transition-colors touch-manipulation"
+                className="p-2 bg-white/20 hover:bg-white/30 rounded-xl transition-all duration-200 hover:scale-110 active:scale-95 touch-manipulation"
                 title="Share"
               >
-                <Share2 className="w-4 h-4 sm:w-5 sm:h-5" />
+                <Share2 className="w-5 h-5" />
               </button>
             </div>
           )}
         </div>
       </div>
 
-      <div className="grid grid-cols-3 gap-2 sm:gap-4">
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-3 sm:p-4 border border-gray-200 dark:border-gray-700 transition-colors">
-          <div className="flex items-center gap-1.5 sm:gap-2 mb-1 sm:mb-2">
-            <Activity className="w-4 h-4 sm:w-5 sm:h-5 text-orange-600 dark:text-orange-400 flex-shrink-0" />
-            <h3 className="text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-400 truncate">Protein</h3>
+      <div className="grid grid-cols-3 gap-4">
+        <div className="card p-4 card-hover">
+          <div className="flex items-center gap-2 mb-2">
+            <Activity className="w-5 h-5 text-primary-600 dark:text-primary-400 flex-shrink-0" />
+            <h3 className="text-xs sm:text-sm font-semibold text-neutral-600 dark:text-neutral-400 truncate">Protein</h3>
           </div>
-          <p className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-gray-100">
+          <p className="text-2xl sm:text-3xl font-bold text-neutral-900 dark:text-neutral-100 mb-1">
             {macros_summary.protein?.toFixed(1) || '0.0'}
           </p>
-          <p className="text-xs text-gray-500 dark:text-gray-400">grams</p>
+          <p className="text-xs text-neutral-500 dark:text-neutral-400">grams</p>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-3 sm:p-4 border border-gray-200 dark:border-gray-700 transition-colors">
-          <div className="flex items-center gap-1.5 sm:gap-2 mb-1 sm:mb-2">
-            <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-green-600 dark:text-green-400 flex-shrink-0" />
-            <h3 className="text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-400 truncate">Carbs</h3>
+        <div className="card p-4 card-hover">
+          <div className="flex items-center gap-2 mb-2">
+            <Zap className="w-5 h-5 text-green-600 dark:text-green-400 flex-shrink-0" />
+            <h3 className="text-xs sm:text-sm font-semibold text-neutral-600 dark:text-neutral-400 truncate">Carbs</h3>
           </div>
-          <p className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-gray-100">
+          <p className="text-2xl sm:text-3xl font-bold text-neutral-900 dark:text-neutral-100 mb-1">
             {macros_summary.carbs?.toFixed(1) || '0.0'}
           </p>
-          <p className="text-xs text-gray-500 dark:text-gray-400">grams</p>
+          <p className="text-xs text-neutral-500 dark:text-neutral-400">grams</p>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-3 sm:p-4 border border-gray-200 dark:border-gray-700 transition-colors">
-          <div className="flex items-center gap-1.5 sm:gap-2 mb-1 sm:mb-2">
-            <Apple className="w-4 h-4 sm:w-5 sm:h-5 text-orange-500 dark:text-orange-400 flex-shrink-0" />
-            <h3 className="text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-400 truncate">Fats</h3>
+        <div className="card p-4 card-hover">
+          <div className="flex items-center gap-2 mb-2">
+            <Apple className="w-5 h-5 text-primary-500 dark:text-primary-400 flex-shrink-0" />
+            <h3 className="text-xs sm:text-sm font-semibold text-neutral-600 dark:text-neutral-400 truncate">Fats</h3>
           </div>
-          <p className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-gray-100">
+          <p className="text-2xl sm:text-3xl font-bold text-neutral-900 dark:text-neutral-100 mb-1">
             {macros_summary.fats?.toFixed(1) || '0.0'}
           </p>
-          <p className="text-xs text-gray-500 dark:text-gray-400">grams</p>
+          <p className="text-xs text-neutral-500 dark:text-neutral-400">grams</p>
         </div>
       </div>
 
       {items && items.length > 0 && (
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-4 sm:p-6 border border-gray-200 dark:border-gray-700 transition-colors">
-          <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-gray-100 mb-3 sm:mb-4">Food Items</h3>
-          <div className="overflow-x-auto -mx-4 sm:mx-0">
-            <div className="inline-block min-w-full align-middle px-4 sm:px-0">
-              <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+        <div className="card p-6">
+          <h3 className="text-xl font-bold text-neutral-900 dark:text-neutral-100 mb-4">Food Items</h3>
+          <div className="overflow-x-auto -mx-6">
+            <div className="inline-block min-w-full align-middle px-6">
+              <table className="min-w-full divide-y divide-neutral-200 dark:divide-neutral-700">
                 <thead>
-                  <tr className="border-b border-gray-200 dark:border-gray-700">
-                    <th className="text-left py-2 sm:py-3 px-2 sm:px-4 text-xs sm:text-sm font-semibold text-gray-700 dark:text-gray-300">Item</th>
-                    <th className="text-right py-2 sm:py-3 px-2 sm:px-4 text-xs sm:text-sm font-semibold text-gray-700 dark:text-gray-300">Cal</th>
-                    <th className="text-right py-2 sm:py-3 px-2 sm:px-4 text-xs sm:text-sm font-semibold text-gray-700 dark:text-gray-300">P</th>
-                    <th className="text-right py-2 sm:py-3 px-2 sm:px-4 text-xs sm:text-sm font-semibold text-gray-700 dark:text-gray-300">C</th>
-                    <th className="text-right py-2 sm:py-3 px-2 sm:px-4 text-xs sm:text-sm font-semibold text-gray-700 dark:text-gray-300">F</th>
+                  <tr className="border-b border-neutral-200 dark:border-neutral-700">
+                    <th className="text-left py-3 px-4 text-sm font-semibold text-neutral-700 dark:text-neutral-300">Item</th>
+                    <th className="text-right py-3 px-4 text-sm font-semibold text-neutral-700 dark:text-neutral-300">Cal</th>
+                    <th className="text-right py-3 px-4 text-sm font-semibold text-neutral-700 dark:text-neutral-300">P</th>
+                    <th className="text-right py-3 px-4 text-sm font-semibold text-neutral-700 dark:text-neutral-300">C</th>
+                    <th className="text-right py-3 px-4 text-sm font-semibold text-neutral-700 dark:text-neutral-300">F</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
+                <tbody className="divide-y divide-neutral-100 dark:divide-neutral-700">
                   {items.map((item, index) => (
-                    <tr key={index} className="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
-                      <td className="py-2 sm:py-3 px-2 sm:px-4 text-xs sm:text-sm font-medium text-gray-900 dark:text-gray-100">{item.name}</td>
-                      <td className="py-2 sm:py-3 px-2 sm:px-4 text-xs sm:text-sm text-gray-700 dark:text-gray-300 text-right">{item.calories?.toFixed(0) || '0'}</td>
-                      <td className="py-2 sm:py-3 px-2 sm:px-4 text-xs sm:text-sm text-gray-700 dark:text-gray-300 text-right">{item.protein?.toFixed(1) || '0.0'}g</td>
-                      <td className="py-2 sm:py-3 px-2 sm:px-4 text-xs sm:text-sm text-gray-700 dark:text-gray-300 text-right">{item.carbs?.toFixed(1) || '0.0'}g</td>
-                      <td className="py-2 sm:py-3 px-2 sm:px-4 text-xs sm:text-sm text-gray-700 dark:text-gray-300 text-right">{item.fats?.toFixed(1) || '0.0'}g</td>
+                    <tr key={index} className="hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-colors">
+                      <td className="py-3 px-4 text-sm font-medium text-neutral-900 dark:text-neutral-100">{item.name}</td>
+                      <td className="py-3 px-4 text-sm text-neutral-700 dark:text-neutral-300 text-right">{item.calories?.toFixed(0) || '0'}</td>
+                      <td className="py-3 px-4 text-sm text-neutral-700 dark:text-neutral-300 text-right">{item.protein?.toFixed(1) || '0.0'}g</td>
+                      <td className="py-3 px-4 text-sm text-neutral-700 dark:text-neutral-300 text-right">{item.carbs?.toFixed(1) || '0.0'}g</td>
+                      <td className="py-3 px-4 text-sm text-neutral-700 dark:text-neutral-300 text-right">{item.fats?.toFixed(1) || '0.0'}g</td>
                     </tr>
                   ))}
                 </tbody>
@@ -182,12 +182,12 @@ const ResultsDashboard = ({ data, loading, onSave }) => {
       )}
 
       {advice && (
-        <div className="bg-gradient-to-r from-green-50 to-orange-50 dark:from-green-900/20 dark:to-orange-900/20 rounded-xl shadow-sm p-4 sm:p-6 border border-green-200 dark:border-green-800 transition-colors">
-          <h3 className="text-base sm:text-lg font-bold text-gray-900 dark:text-gray-100 mb-2 flex items-center gap-2">
+        <div className="bg-gradient-to-r from-green-50 to-primary-50 dark:from-green-900/20 dark:to-primary-900/20 rounded-2xl shadow-soft p-6 border border-green-200 dark:border-green-800 animate-fade-in">
+          <h3 className="text-lg font-bold text-neutral-900 dark:text-neutral-100 mb-2 flex items-center gap-2">
             <span className="text-green-600 dark:text-green-400">💡</span>
             AI Nutrition Advice
           </h3>
-          <p className="text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed">{advice}</p>
+          <p className="text-base text-neutral-700 dark:text-neutral-300 leading-relaxed">{advice}</p>
         </div>
       )}
     </div>

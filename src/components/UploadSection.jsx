@@ -48,15 +48,15 @@ const UploadSection = ({ onImageSelect, onAnalyze, selectedImage, loading }) => 
   const imageUrl = selectedImage ? URL.createObjectURL(selectedImage) : null;
 
   return (
-    <div className="space-y-4 sm:space-y-6">
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-3 sm:p-4 border border-gray-200 dark:border-gray-700 transition-colors">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+    <div className="space-y-6">
+      <div className="card p-5">
+        <label className="block text-sm font-semibold text-neutral-700 dark:text-neutral-300 mb-3">
           Dietary Preference
         </label>
         <select
           value={dietaryPreference}
           onChange={(e) => setDietaryPreference(e.target.value)}
-          className="w-full px-3 sm:px-4 py-2 text-sm sm:text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+          className="select"
         >
           <option value="Standard">Standard</option>
           <option value="Jain">Jain</option>
@@ -66,10 +66,10 @@ const UploadSection = ({ onImageSelect, onAnalyze, selectedImage, loading }) => 
         </select>
       </div>
       <div
-        className={`relative border-2 border-dashed rounded-xl p-4 sm:p-6 lg:p-8 transition-all ${
+        className={`relative border-2 border-dashed rounded-2xl p-8 sm:p-10 lg:p-12 transition-all duration-300 ${
           dragActive
-            ? 'border-orange-500 dark:border-orange-400 bg-orange-50 dark:bg-orange-900/20'
-            : 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 hover:border-orange-400 dark:hover:border-orange-500'
+            ? 'border-primary-500 dark:border-primary-400 bg-primary-50 dark:bg-primary-900/20 scale-[1.01]'
+            : 'border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 hover:border-primary-400 dark:hover:border-primary-500 hover:bg-neutral-50 dark:hover:bg-neutral-700/30'
         }`}
         onDragEnter={handleDrag}
         onDragLeave={handleDrag}
@@ -85,25 +85,25 @@ const UploadSection = ({ onImageSelect, onAnalyze, selectedImage, loading }) => 
         />
 
         {imageUrl ? (
-          <div className="space-y-3 sm:space-y-4">
-            <div className="relative rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-700">
+          <div className="space-y-4 animate-fade-in">
+            <div className="relative rounded-xl overflow-hidden bg-neutral-100 dark:bg-neutral-700 shadow-medium">
               <img
                 src={imageUrl}
                 alt="Selected"
                 className="w-full h-auto max-h-64 sm:max-h-80 lg:max-h-96 object-contain"
               />
             </div>
-            <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
+            <div className="flex flex-col sm:flex-row gap-3">
               <button
                 onClick={handleButtonClick}
-                className="flex-1 px-4 py-2.5 text-sm sm:text-base bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors font-medium"
+                className="flex-1 px-4 py-3 btn-secondary"
               >
                 Change Image
               </button>
               <button
                 onClick={handleAnalyzeClick}
                 disabled={loading}
-                className="flex-1 px-4 py-2.5 text-sm sm:text-base bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-lg hover:from-orange-600 hover:to-orange-700 transition-all font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="flex-1 px-4 py-3 bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white rounded-xl font-semibold transition-all duration-200 shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 disabled:hover:shadow-md"
               >
                 {loading ? (
                   <>
@@ -122,21 +122,21 @@ const UploadSection = ({ onImageSelect, onAnalyze, selectedImage, loading }) => 
             </div>
           </div>
         ) : (
-          <div className="text-center py-4 sm:py-6">
-            <div className="flex justify-center mb-3 sm:mb-4">
-              <div className="p-3 sm:p-4 bg-orange-100 dark:bg-orange-900/30 rounded-full">
-                <ImageIcon className="w-10 h-10 sm:w-12 sm:h-12 text-orange-600 dark:text-orange-400" />
+          <div className="text-center py-8 animate-fade-in">
+            <div className="flex justify-center mb-4">
+              <div className="p-4 bg-primary-100 dark:bg-primary-900/30 rounded-2xl shadow-soft">
+                <ImageIcon className="w-12 h-12 sm:w-14 sm:h-14 text-primary-600 dark:text-primary-400" />
               </div>
             </div>
-            <p className="text-base sm:text-lg font-medium text-gray-700 dark:text-gray-300 mb-1 sm:mb-2">
+            <p className="text-lg sm:text-xl font-semibold text-neutral-700 dark:text-neutral-300 mb-2">
               Drop your Thali image here
             </p>
-            <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mb-3 sm:mb-4">
+            <p className="text-sm text-neutral-500 dark:text-neutral-400 mb-6">
               or click to browse
             </p>
             <button
               onClick={handleButtonClick}
-              className="px-5 sm:px-6 py-2 text-sm sm:text-base bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors font-medium"
+              className="btn-primary px-6 py-3"
             >
               Select Image
             </button>
