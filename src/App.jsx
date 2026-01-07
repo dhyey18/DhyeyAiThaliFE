@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Camera, History, TrendingUp, Target, BarChart3, Menu, X, Moon, Sun } from 'lucide-react';
+import { Camera, History, TrendingUp, Target, BarChart3, Menu, X, Moon, Sun, FileText, Lightbulb, Plus, Star } from 'lucide-react';
 import { API_BASE, ANALYZE_API } from './config';
 import UploadSection from './components/UploadSection';
 import ResultsDashboard from './components/ResultsDashboard';
@@ -8,6 +8,10 @@ import MealHistory from './components/MealHistory';
 import DailyTracker from './components/DailyTracker';
 import ProgressCharts from './components/ProgressCharts';
 import Dashboard from './components/Dashboard';
+import WeeklySummary from './components/WeeklySummary';
+import NutritionInsights from './components/NutritionInsights';
+import QuickAddMeal from './components/QuickAddMeal';
+import MealFavorites from './components/MealFavorites';
 
 function App() {
   const [activeTab, setActiveTab] = useState('analyze');
@@ -91,6 +95,10 @@ function App() {
     { id: 'history', label: 'History', icon: History },
     { id: 'progress', label: 'Progress', icon: TrendingUp },
     { id: 'goals', label: 'Goals', icon: Target },
+    { id: 'quick-add', label: 'Quick Add', icon: Plus },
+    { id: 'favorites', label: 'Favorites', icon: Star },
+    { id: 'weekly', label: 'Weekly', icon: FileText },
+    { id: 'insights', label: 'Insights', icon: Lightbulb },
   ];
 
   const toggleDarkMode = () => {
@@ -237,6 +245,30 @@ function App() {
         {activeTab === 'goals' && (
           <div className="max-w-4xl mx-auto">
             <DailyTracker meals={meals} />
+          </div>
+        )}
+
+        {activeTab === 'quick-add' && (
+          <div className="max-w-4xl mx-auto">
+            <QuickAddMeal onSave={handleSaveMeal} />
+          </div>
+        )}
+
+        {activeTab === 'favorites' && (
+          <div className="max-w-4xl mx-auto">
+            <MealFavorites onSelectMeal={handleSelectMeal} onSave={handleSaveMeal} currentMeal={data} />
+          </div>
+        )}
+
+        {activeTab === 'weekly' && (
+          <div className="max-w-6xl mx-auto">
+            <WeeklySummary />
+          </div>
+        )}
+
+        {activeTab === 'insights' && (
+          <div className="max-w-4xl mx-auto">
+            <NutritionInsights />
           </div>
         )}
       </main>

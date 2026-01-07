@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Clock, Trash2, Calendar, Search } from 'lucide-react';
+import { Clock, Trash2, Calendar, Search, Download } from 'lucide-react';
 import { API_BASE } from '../config';
 
 const MealHistory = ({ onSelectMeal }) => {
@@ -82,6 +82,32 @@ const MealHistory = ({ onSelectMeal }) => {
           Meal History
         </h2>
         <div className="flex gap-2">
+          <button
+            onClick={async () => {
+              try {
+                const startDate = filterDate || new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+                const endDate = new Date().toISOString().split('T')[0];
+                const response = await axios.get(`${API_BASE}/meals/export/csv`, {
+                  params: { startDate, endDate },
+                  responseType: 'blob'
+                });
+                const url = window.URL.createObjectURL(new Blob([response.data]));
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', `meals-export-${Date.now()}.csv`);
+                document.body.appendChild(link);
+                link.click();
+                link.remove();
+              } catch (error) {
+                console.error('Error exporting:', error);
+                alert('Failed to export data');
+              }
+            }}
+            className="flex items-center gap-2 px-3 py-1.5 bg-green-600 dark:bg-green-500 text-white rounded-lg hover:bg-green-700 dark:hover:bg-green-600 transition-colors text-sm"
+          >
+            <Download className="w-4 h-4" />
+            Export CSV
+          </button>
           <input
             type="date"
             value={filterDate}
