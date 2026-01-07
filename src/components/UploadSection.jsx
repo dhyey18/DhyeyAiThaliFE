@@ -49,14 +49,14 @@ const UploadSection = ({ onImageSelect, onAnalyze, selectedImage, loading }) => 
 
   return (
     <div className="space-y-4 sm:space-y-6">
-      <div className="bg-white rounded-xl shadow-sm p-3 sm:p-4 border border-gray-200">
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-3 sm:p-4 border border-gray-200 dark:border-gray-700 transition-colors">
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
           Dietary Preference
         </label>
         <select
           value={dietaryPreference}
           onChange={(e) => setDietaryPreference(e.target.value)}
-          className="w-full px-3 sm:px-4 py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+          className="w-full px-3 sm:px-4 py-2 text-sm sm:text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
         >
           <option value="Standard">Standard</option>
           <option value="Jain">Jain</option>
@@ -68,8 +68,8 @@ const UploadSection = ({ onImageSelect, onAnalyze, selectedImage, loading }) => 
       <div
         className={`relative border-2 border-dashed rounded-xl p-4 sm:p-6 lg:p-8 transition-all ${
           dragActive
-            ? 'border-orange-500 bg-orange-50'
-            : 'border-gray-300 bg-white hover:border-orange-400'
+            ? 'border-orange-500 dark:border-orange-400 bg-orange-50 dark:bg-orange-900/20'
+            : 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 hover:border-orange-400 dark:hover:border-orange-500'
         }`}
         onDragEnter={handleDrag}
         onDragLeave={handleDrag}
@@ -86,7 +86,7 @@ const UploadSection = ({ onImageSelect, onAnalyze, selectedImage, loading }) => 
 
         {imageUrl ? (
           <div className="space-y-3 sm:space-y-4">
-            <div className="relative rounded-lg overflow-hidden bg-gray-100">
+            <div className="relative rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-700">
               <img
                 src={imageUrl}
                 alt="Selected"
@@ -96,7 +96,7 @@ const UploadSection = ({ onImageSelect, onAnalyze, selectedImage, loading }) => 
             <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
               <button
                 onClick={handleButtonClick}
-                className="flex-1 px-4 py-2.5 text-sm sm:text-base bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors font-medium"
+                className="flex-1 px-4 py-2.5 text-sm sm:text-base bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors font-medium"
               >
                 Change Image
               </button>
@@ -124,14 +124,14 @@ const UploadSection = ({ onImageSelect, onAnalyze, selectedImage, loading }) => 
         ) : (
           <div className="text-center py-4 sm:py-6">
             <div className="flex justify-center mb-3 sm:mb-4">
-              <div className="p-3 sm:p-4 bg-orange-100 rounded-full">
-                <ImageIcon className="w-10 h-10 sm:w-12 sm:h-12 text-orange-600" />
+              <div className="p-3 sm:p-4 bg-orange-100 dark:bg-orange-900/30 rounded-full">
+                <ImageIcon className="w-10 h-10 sm:w-12 sm:h-12 text-orange-600 dark:text-orange-400" />
               </div>
             </div>
-            <p className="text-base sm:text-lg font-medium text-gray-700 mb-1 sm:mb-2">
+            <p className="text-base sm:text-lg font-medium text-gray-700 dark:text-gray-300 mb-1 sm:mb-2">
               Drop your Thali image here
             </p>
-            <p className="text-xs sm:text-sm text-gray-500 mb-3 sm:mb-4">
+            <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mb-3 sm:mb-4">
               or click to browse
             </p>
             <button
