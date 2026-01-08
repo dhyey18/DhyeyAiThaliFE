@@ -101,7 +101,7 @@ function App() {
   const tabs = [
     { id: 'analyze', label: 'Analyze', icon: Camera },
     { id: 'ai-chat', label: 'AI Chat', icon: MessageCircle },
-    { id: 'suggestions', label: 'Suggestions', icon: Sparkles },
+    // { id: 'suggestions', label: 'Suggestions', icon: Sparkles },
     { id: 'recipe', label: 'Recipes', icon: ChefHat },
     { id: 'text-cal', label: 'Text Cal', icon: FileText },
     { id: 'compare', label: 'Compare', icon: Scale },
