@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Camera, History, TrendingUp, Target, BarChart3, Menu, X, Moon, Sun, FileText, Lightbulb, Plus, Star, MessageCircle, Sparkles, Heart, Calendar, ChefHat, Scale, Dumbbell, ShoppingCart } from 'lucide-react';
+import { Camera, History, TrendingUp, Target, BarChart3, Menu, X, Moon, Sun, FileText, Lightbulb, Plus, Star, MessageCircle, Sparkles, Heart, Calendar, ChefHat, Scale, Dumbbell, ShoppingCart, Leaf, Timer, Droplet, Shield } from 'lucide-react';
 import { API_BASE, ANALYZE_API } from './config';
 import UploadSection from './components/UploadSection';
 import ResultsDashboard from './components/ResultsDashboard';
@@ -21,6 +21,11 @@ import TextToCalories from './components/TextToCalories';
 import FoodComparison from './components/FoodComparison';
 import AIDietCoach from './components/AIDietCoach';
 import SmartGroceryList from './components/SmartGroceryList';
+import AIFoodSubstitute from './components/AIFoodSubstitute';
+import AIMealRating from './components/AIMealRating';
+import AIFastingTracker from './components/AIFastingTracker';
+import AIHydrationTracker from './components/AIHydrationTracker';
+import AIAllergenChecker from './components/AIAllergenChecker';
 
 function App() {
   const [activeTab, setActiveTab] = useState('analyze');
@@ -101,11 +106,15 @@ function App() {
   const tabs = [
     { id: 'analyze', label: 'Analyze', icon: Camera },
     { id: 'ai-chat', label: 'AI Chat', icon: MessageCircle },
-    // { id: 'suggestions', label: 'Suggestions', icon: Sparkles },
     { id: 'recipe', label: 'Recipes', icon: ChefHat },
     { id: 'text-cal', label: 'Text Cal', icon: FileText },
     { id: 'compare', label: 'Compare', icon: Scale },
+    { id: 'substitute', label: 'Substitute', icon: Leaf },
+    { id: 'rating', label: 'Rate Meal', icon: Star },
     { id: 'coach', label: 'Coach', icon: Dumbbell },
+    { id: 'fasting', label: 'Fasting', icon: Timer },
+    { id: 'hydration', label: 'Hydrate', icon: Droplet },
+    { id: 'allergen', label: 'Allergen', icon: Shield },
     { id: 'grocery', label: 'Grocery', icon: ShoppingCart },
     { id: 'health', label: 'Health', icon: Heart },
     { id: 'meal-plan', label: 'Meal Plan', icon: Calendar },
@@ -342,6 +351,36 @@ function App() {
         {activeTab === 'grocery' && (
           <div className="max-w-5xl mx-auto">
             <SmartGroceryList />
+          </div>
+        )}
+
+        {activeTab === 'substitute' && (
+          <div className="max-w-4xl mx-auto">
+            <AIFoodSubstitute />
+          </div>
+        )}
+
+        {activeTab === 'rating' && (
+          <div className="max-w-4xl mx-auto">
+            <AIMealRating />
+          </div>
+        )}
+
+        {activeTab === 'fasting' && (
+          <div className="max-w-4xl mx-auto">
+            <AIFastingTracker />
+          </div>
+        )}
+
+        {activeTab === 'hydration' && (
+          <div className="max-w-4xl mx-auto">
+            <AIHydrationTracker />
+          </div>
+        )}
+
+        {activeTab === 'allergen' && (
+          <div className="max-w-4xl mx-auto">
+            <AIAllergenChecker />
           </div>
         )}
       </main>
