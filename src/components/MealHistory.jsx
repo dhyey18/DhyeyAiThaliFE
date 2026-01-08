@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Clock, Trash2, Calendar, Search, Download } from 'lucide-react';
+import { Clock, Trash2, Calendar, Search, Download, AlertTriangle } from 'lucide-react';
 import { API_BASE } from '../config';
 
 const MealHistory = ({ onSelectMeal }) => {
@@ -38,6 +38,19 @@ const MealHistory = ({ onSelectMeal }) => {
     } catch (error) {
       console.error('Error deleting meal:', error);
       alert('Failed to delete meal');
+    }
+  };
+
+  const deleteAllMeals = async () => {
+    if (!window.confirm('Are you sure you want to delete ALL meals? This action cannot be undone.')) return;
+    
+    try {
+      await axios.delete(`${API_BASE}/meals`);
+      loadMeals();
+      alert('All meals deleted successfully');
+    } catch (error) {
+      console.error('Error deleting all meals:', error);
+      alert('Failed to delete all meals');
     }
   };
 
@@ -81,7 +94,16 @@ const MealHistory = ({ onSelectMeal }) => {
           <Clock className="w-6 h-6 text-primary-600 dark:text-primary-400" />
           Meal History
         </h2>
-        <div className="flex gap-2">
+        <div className="flex gap-2 flex-wrap">
+          {meals.length > 0 && (
+            <button
+              onClick={deleteAllMeals}
+              className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-xl transition-all duration-200 shadow-md hover:shadow-lg text-sm font-medium"
+            >
+              <AlertTriangle className="w-4 h-4" />
+              Delete All
+            </button>
+          )}
           <button
             onClick={async () => {
               try {
