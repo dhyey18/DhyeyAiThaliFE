@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Camera, History, TrendingUp, Target, BarChart3, Menu, X, Moon, Sun, FileText, Lightbulb, Plus, Star } from 'lucide-react';
+import { Camera, History, TrendingUp, Target, BarChart3, Menu, X, Moon, Sun, FileText, Lightbulb, Plus, Star, MessageCircle, Sparkles, Heart, Calendar } from 'lucide-react';
 import { API_BASE, ANALYZE_API } from './config';
 import UploadSection from './components/UploadSection';
 import ResultsDashboard from './components/ResultsDashboard';
@@ -12,6 +12,10 @@ import WeeklySummary from './components/WeeklySummary';
 import NutritionInsights from './components/NutritionInsights';
 import QuickAddMeal from './components/QuickAddMeal';
 import MealFavorites from './components/MealFavorites';
+import AIChatbot from './components/AIChatbot';
+import MealSuggestions from './components/MealSuggestions';
+import AIHealthScore from './components/AIHealthScore';
+import AIMealPlanner from './components/AIMealPlanner';
 
 function App() {
   const [activeTab, setActiveTab] = useState('analyze');
@@ -91,14 +95,18 @@ function App() {
 
   const tabs = [
     { id: 'analyze', label: 'Analyze', icon: Camera },
+    { id: 'ai-chat', label: 'AI Chat', icon: MessageCircle },
+    { id: 'suggestions', label: 'Suggestions', icon: Sparkles },
     { id: 'dashboard', label: 'Dashboard', icon: BarChart3 },
+    { id: 'health', label: 'Health', icon: Heart },
+    { id: 'meal-plan', label: 'Meal Plan', icon: Calendar },
     { id: 'history', label: 'History', icon: History },
     { id: 'progress', label: 'Progress', icon: TrendingUp },
     { id: 'goals', label: 'Goals', icon: Target },
     { id: 'quick-add', label: 'Quick Add', icon: Plus },
     { id: 'favorites', label: 'Favorites', icon: Star },
     { id: 'weekly', label: 'Weekly', icon: FileText },
-    { id: 'insights', label: 'Insights', icon: Lightbulb },
+    { id: 'insights', label: 'AI Insights', icon: Lightbulb },
   ];
 
   const toggleDarkMode = () => {
@@ -274,6 +282,30 @@ function App() {
         {activeTab === 'insights' && (
           <div className="max-w-4xl mx-auto">
             <NutritionInsights />
+          </div>
+        )}
+
+        {activeTab === 'ai-chat' && (
+          <div className="max-w-3xl mx-auto">
+            <AIChatbot />
+          </div>
+        )}
+
+        {activeTab === 'suggestions' && (
+          <div className="max-w-5xl mx-auto">
+            <MealSuggestions onSave={handleSaveMeal} />
+          </div>
+        )}
+
+        {activeTab === 'health' && (
+          <div className="max-w-4xl mx-auto">
+            <AIHealthScore />
+          </div>
+        )}
+
+        {activeTab === 'meal-plan' && (
+          <div className="max-w-5xl mx-auto">
+            <AIMealPlanner />
           </div>
         )}
       </main>
