@@ -34,10 +34,10 @@ const ProgressCharts = () => {
 
   if (loading) {
     return (
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 border border-gray-200 dark:border-gray-700 transition-colors">
+      <div className="card p-6">
         <div className="animate-pulse space-y-4">
-          <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-1/3"></div>
-          <div className="h-64 bg-gray-200 dark:bg-gray-700 rounded"></div>
+          <div className="h-6 bg-neutral-200 dark:bg-neutral-700 rounded-xl w-1/3"></div>
+          <div className="h-64 bg-neutral-200 dark:bg-neutral-700 rounded-xl"></div>
         </div>
       </div>
     );
@@ -52,11 +52,11 @@ const ProgressCharts = () => {
   }));
 
   return (
-    <div className="space-y-4 sm:space-y-6">
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-4 sm:p-6 border border-gray-200 dark:border-gray-700 transition-colors">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-0 mb-4 sm:mb-6">
-          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-gray-100 flex items-center gap-2">
-            <TrendingUp className="w-5 h-5 sm:w-6 sm:h-6 text-orange-600 dark:text-orange-400" />
+    <div className="space-y-6">
+      <div className="card p-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
+          <h2 className="text-2xl font-bold text-neutral-900 dark:text-neutral-100 flex items-center gap-2">
+            <TrendingUp className="w-6 h-6 text-primary-600 dark:text-primary-400" />
             Nutrition Trends
           </h2>
           <div className="flex gap-2">
@@ -64,10 +64,10 @@ const ProgressCharts = () => {
               <button
                 key={d}
                 onClick={() => setDays(d)}
-                className={`px-2 sm:px-3 py-1.5 sm:py-1 rounded-lg text-xs sm:text-sm transition-colors touch-manipulation ${
+                className={`px-3 py-1.5 rounded-xl text-sm transition-all duration-200 touch-manipulation ${
                   days === d
-                    ? 'bg-orange-600 dark:bg-orange-500 text-white'
-                    : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+                    ? 'bg-primary-500 text-white shadow-md'
+                    : 'bg-neutral-100 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-600'
                 }`}
               >
                 {d}d
@@ -77,38 +77,38 @@ const ProgressCharts = () => {
         </div>
 
         {chartData.length === 0 ? (
-          <div className="text-center py-8 sm:py-12 text-gray-500 dark:text-gray-400">
-            <Calendar className="w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-3 text-gray-300 dark:text-gray-600" />
-            <p className="text-sm sm:text-base">No data available for the selected period</p>
+          <div className="text-center py-12 text-neutral-500 dark:text-neutral-400">
+            <Calendar className="w-12 h-12 mx-auto mb-3 text-neutral-300 dark:text-neutral-600" />
+            <p className="text-base">No data available for the selected period</p>
           </div>
         ) : (
           <>
-            <div className="mb-6 sm:mb-8">
-              <h3 className="text-base sm:text-lg font-semibold text-gray-700 dark:text-gray-300 mb-3 sm:mb-4">Daily Calories</h3>
-              <ResponsiveContainer width="100%" height={220} className="sm:h-[250px]">
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold text-neutral-700 dark:text-neutral-300 mb-4">Daily Calories</h3>
+              <ResponsiveContainer width="100%" height={300}>
                 <LineChart data={chartData} margin={{ top: 5, right: 5, left: 0, bottom: 5 }}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="date" tick={{ fontSize: 12 }} />
-                  <YAxis tick={{ fontSize: 12 }} />
-                  <Tooltip />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                  <XAxis dataKey="date" tick={{ fontSize: 12 }} stroke="#6b7280" />
+                  <YAxis tick={{ fontSize: 12 }} stroke="#6b7280" />
+                  <Tooltip contentStyle={{ borderRadius: '0.75rem', border: '1px solid #e5e7eb' }} />
                   <Legend wrapperStyle={{ fontSize: '12px' }} />
-                  <Line type="monotone" dataKey="calories" stroke="#f97316" strokeWidth={2} />
+                  <Line type="monotone" dataKey="calories" stroke="#f97316" strokeWidth={3} dot={{ r: 4 }} />
                 </LineChart>
               </ResponsiveContainer>
             </div>
 
             <div>
-              <h3 className="text-base sm:text-lg font-semibold text-gray-700 dark:text-gray-300 mb-3 sm:mb-4">Macros Breakdown</h3>
-              <ResponsiveContainer width="100%" height={220} className="sm:h-[250px]">
+              <h3 className="text-lg font-semibold text-neutral-700 dark:text-neutral-300 mb-4">Macros Breakdown</h3>
+              <ResponsiveContainer width="100%" height={300}>
                 <BarChart data={chartData} margin={{ top: 5, right: 5, left: 0, bottom: 5 }}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="date" tick={{ fontSize: 12 }} />
-                  <YAxis tick={{ fontSize: 12 }} />
-                  <Tooltip />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                  <XAxis dataKey="date" tick={{ fontSize: 12 }} stroke="#6b7280" />
+                  <YAxis tick={{ fontSize: 12 }} stroke="#6b7280" />
+                  <Tooltip contentStyle={{ borderRadius: '0.75rem', border: '1px solid #e5e7eb' }} />
                   <Legend wrapperStyle={{ fontSize: '12px' }} />
-                  <Bar dataKey="protein" fill="#3b82f6" />
-                  <Bar dataKey="carbs" fill="#22c55e" />
-                  <Bar dataKey="fats" fill="#a855f7" />
+                  <Bar dataKey="protein" fill="#3b82f6" radius={[8, 8, 0, 0]} />
+                  <Bar dataKey="carbs" fill="#22c55e" radius={[8, 8, 0, 0]} />
+                  <Bar dataKey="fats" fill="#a855f7" radius={[8, 8, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </div>

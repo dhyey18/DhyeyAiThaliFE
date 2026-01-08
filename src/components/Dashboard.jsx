@@ -70,10 +70,10 @@ const Dashboard = () => {
 
   if (loading) {
     return (
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 border border-gray-200 dark:border-gray-700 transition-colors">
+      <div className="card p-6">
         <div className="animate-pulse space-y-4">
-          <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-1/3"></div>
-          <div className="h-64 bg-gray-200 dark:bg-gray-700 rounded"></div>
+          <div className="h-6 bg-neutral-200 dark:bg-neutral-700 rounded-xl w-1/3"></div>
+          <div className="h-64 bg-neutral-200 dark:bg-neutral-700 rounded-xl"></div>
         </div>
       </div>
     );
@@ -81,44 +81,44 @@ const Dashboard = () => {
 
   return (
     <div className="space-y-6">
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 border border-gray-200 dark:border-gray-700 transition-colors">
+      <div className="card p-6">
         <div className="flex items-center gap-2 mb-6">
-          <TrendingUp className="w-6 h-6 text-orange-600 dark:text-orange-400" />
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Analytics Dashboard</h2>
+          <TrendingUp className="w-6 h-6 text-primary-600 dark:text-primary-400" />
+          <h2 className="text-2xl font-bold text-neutral-900 dark:text-neutral-100">Analytics Dashboard</h2>
         </div>
 
         {dailyCaloriesData.length === 0 ? (
-          <div className="text-center py-12 text-gray-500 dark:text-gray-400">
-            <Calendar className="w-12 h-12 mx-auto mb-3 text-gray-300 dark:text-gray-600" />
+          <div className="text-center py-12 text-neutral-500 dark:text-neutral-400">
+            <Calendar className="w-12 h-12 mx-auto mb-3 text-neutral-300 dark:text-neutral-600" />
             <p>No meal data available</p>
             <p className="text-sm mt-2">Start analyzing meals to see your nutrition trends</p>
           </div>
         ) : (
             <>
-            <div className="mb-6 sm:mb-8">
-              <h3 className="text-base sm:text-lg font-semibold text-gray-700 dark:text-gray-300 mb-3 sm:mb-4 flex items-center gap-2">
-                <Utensils className="w-4 h-4 sm:w-5 sm:h-5" />
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold text-neutral-700 dark:text-neutral-300 mb-4 flex items-center gap-2">
+                <Utensils className="w-5 h-5" />
                 Daily Calories vs Goal
               </h3>
-              <ResponsiveContainer width="100%" height={250} className="sm:h-[300px]">
+              <ResponsiveContainer width="100%" height={300}>
                 <BarChart data={dailyCaloriesData} margin={{ top: 5, right: 5, left: 0, bottom: 5 }}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="date" tick={{ fontSize: 12 }} />
-                  <YAxis tick={{ fontSize: 12 }} />
-                  <Tooltip />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                  <XAxis dataKey="date" tick={{ fontSize: 12 }} stroke="#6b7280" />
+                  <YAxis tick={{ fontSize: 12 }} stroke="#6b7280" />
+                  <Tooltip contentStyle={{ borderRadius: '0.75rem', border: '1px solid #e5e7eb' }} />
                   <Legend wrapperStyle={{ fontSize: '12px' }} />
-                  <Bar dataKey="calories" fill="#f97316" name="Calories" />
-                  <Bar dataKey="goal" fill="#e5e7eb" name="Goal (2000)" />
+                  <Bar dataKey="calories" fill="#f97316" name="Calories" radius={[8, 8, 0, 0]} />
+                  <Bar dataKey="goal" fill="#e5e7eb" name="Goal (2000)" radius={[8, 8, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
 
             {todayMacrosData.length > 0 && (
               <div>
-                <h3 className="text-base sm:text-lg font-semibold text-gray-700 dark:text-gray-300 mb-3 sm:mb-4">
+                <h3 className="text-lg font-semibold text-neutral-700 dark:text-neutral-300 mb-4">
                   Today's Macronutrient Split
                 </h3>
-                <ResponsiveContainer width="100%" height={250} className="sm:h-[300px]">
+                <ResponsiveContainer width="100%" height={300}>
                   <PieChart>
                     <Pie
                       data={todayMacrosData}
@@ -126,8 +126,7 @@ const Dashboard = () => {
                       cy="50%"
                       labelLine={false}
                       label={({ name, value, percent }) => `${name}: ${value}g`}
-                      outerRadius={80}
-                      className="sm:outerRadius-100"
+                      outerRadius={100}
                       fill="#8884d8"
                       dataKey="value"
                     >
@@ -135,7 +134,7 @@ const Dashboard = () => {
                         <Cell key={`cell-${index}`} fill={entry.color} />
                       ))}
                     </Pie>
-                    <Tooltip />
+                    <Tooltip contentStyle={{ borderRadius: '0.75rem', border: '1px solid #e5e7eb' }} />
                   </PieChart>
                 </ResponsiveContainer>
               </div>
@@ -144,46 +143,46 @@ const Dashboard = () => {
         )}
       </div>
 
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-4 sm:p-6 border border-gray-200 dark:border-gray-700 transition-colors">
-        <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-gray-100 mb-3 sm:mb-4 flex items-center gap-2">
-          <Calendar className="w-4 h-4 sm:w-5 sm:h-5 text-orange-600 dark:text-orange-400" />
+      <div className="card p-6">
+        <h3 className="text-xl font-bold text-neutral-900 dark:text-neutral-100 mb-4 flex items-center gap-2">
+          <Calendar className="w-5 h-5 text-primary-600 dark:text-primary-400" />
           Recent Meal History
         </h3>
         {meals.length === 0 ? (
-          <div className="text-center py-6 sm:py-8 text-gray-500 dark:text-gray-400">
-            <p className="text-sm sm:text-base">No meals found</p>
+          <div className="text-center py-8 text-neutral-500 dark:text-neutral-400">
+            <p className="text-base">No meals found</p>
           </div>
         ) : (
-          <div className="space-y-2 sm:space-y-3 max-h-96 overflow-y-auto">
+          <div className="space-y-3 max-h-96 overflow-y-auto">
             {meals.slice(0, 10).map((meal) => (
               <div
                 key={meal.id}
-                className="border border-gray-200 dark:border-gray-700 rounded-lg p-3 sm:p-4 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"
+                className="border border-neutral-200 dark:border-neutral-700 rounded-xl p-4 hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-colors card-hover"
               >
                 <div className="flex items-start justify-between">
                   <div className="flex-1 min-w-0">
                     <div className="flex flex-wrap items-center gap-2 mb-2">
-                      <span className="text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-400">
+                      <span className="text-sm font-medium text-neutral-600 dark:text-neutral-400">
                         {format(new Date(meal.timestamp || meal.createdAt), 'MMM dd, yyyy HH:mm')}
                       </span>
-                      <span className="px-2 py-0.5 sm:py-1 bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 rounded text-xs font-medium whitespace-nowrap">
+                      <span className="px-2 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-lg text-xs font-medium whitespace-nowrap">
                         {meal.mealType || 'Meal'}
                       </span>
                       {meal.dietaryPreference && meal.dietaryPreference !== 'Standard' && (
-                        <span className="px-2 py-0.5 sm:py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded text-xs font-medium whitespace-nowrap">
+                        <span className="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-lg text-xs font-medium whitespace-nowrap">
                           {meal.dietaryPreference}
                         </span>
                       )}
                     </div>
-                    <div className="flex flex-wrap items-center gap-3 sm:gap-4 mb-2">
-                      <span className="text-lg sm:text-xl font-bold text-orange-600 dark:text-orange-400">
+                    <div className="flex flex-wrap items-center gap-4 mb-2">
+                      <span className="text-xl font-bold text-primary-600 dark:text-primary-400">
                         {meal.total_calories?.toFixed(0) || 0} kcal
                       </span>
-                      <span className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
+                      <span className="text-sm text-neutral-600 dark:text-neutral-400">
                         {meal.items?.length || 0} items
                       </span>
                     </div>
-                    <div className="flex flex-wrap gap-3 sm:gap-4 text-xs text-gray-500 dark:text-gray-400">
+                    <div className="flex flex-wrap gap-4 text-xs text-neutral-500 dark:text-neutral-400">
                       <span>P: {meal.macros_summary?.protein?.toFixed(1) || 0}g</span>
                       <span>C: {meal.macros_summary?.carbs?.toFixed(1) || 0}g</span>
                       <span>F: {meal.macros_summary?.fats?.toFixed(1) || 0}g</span>
@@ -193,14 +192,14 @@ const Dashboard = () => {
                         {meal.items.slice(0, 3).map((item, idx) => (
                           <span
                             key={idx}
-                            className="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 rounded text-xs truncate max-w-[120px] sm:max-w-none"
+                            className="px-2 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-lg text-xs truncate max-w-[120px] sm:max-w-none"
                             title={item.name}
                           >
                             {item.name}
                           </span>
                         ))}
                         {meal.items.length > 3 && (
-                          <span className="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 rounded text-xs">
+                          <span className="px-2 py-1 bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-400 rounded-lg text-xs">
                             +{meal.items.length - 3} more
                           </span>
                         )}

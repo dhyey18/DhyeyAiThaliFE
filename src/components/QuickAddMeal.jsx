@@ -67,16 +67,16 @@ const QuickAddMeal = ({ onSave }) => {
   const totals = calculateTotals();
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-4 sm:p-6 border border-gray-200 dark:border-gray-700 transition-colors">
-      <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4 sm:mb-6">Quick Add Meal</h2>
+    <div className="card p-6">
+      <h2 className="text-2xl font-bold text-neutral-900 dark:text-neutral-100 mb-6">Quick Add Meal</h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Meal Type</label>
+          <label className="block text-sm font-semibold text-neutral-700 dark:text-neutral-300 mb-2">Meal Type</label>
           <select
             value={mealType}
             onChange={(e) => setMealType(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+            className="select"
           >
             <option>Breakfast</option>
             <option>Lunch</option>
@@ -85,11 +85,11 @@ const QuickAddMeal = ({ onSave }) => {
           </select>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Dietary Preference</label>
+          <label className="block text-sm font-semibold text-neutral-700 dark:text-neutral-300 mb-2">Dietary Preference</label>
           <select
             value={dietaryPreference}
             onChange={(e) => setDietaryPreference(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+            className="select"
           >
             <option>Standard</option>
             <option>Jain</option>
@@ -102,10 +102,10 @@ const QuickAddMeal = ({ onSave }) => {
 
       <div className="space-y-4 mb-6">
         <div className="flex items-center justify-between">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Food Items</h3>
+          <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">Food Items</h3>
           <button
             onClick={addItem}
-            className="flex items-center gap-2 px-3 py-1.5 bg-orange-500 dark:bg-orange-600 text-white rounded-lg hover:bg-orange-600 dark:hover:bg-orange-700 transition-colors text-sm"
+            className="flex items-center gap-2 px-3 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-xl transition-all duration-200 shadow-sm hover:shadow-md text-sm font-medium"
           >
             <Plus className="w-4 h-4" />
             Add Item
@@ -113,14 +113,14 @@ const QuickAddMeal = ({ onSave }) => {
         </div>
 
         {items.map((item, index) => (
-          <div key={index} className="grid grid-cols-12 gap-2 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
+          <div key={index} className="grid grid-cols-12 gap-2 p-4 bg-neutral-50 dark:bg-neutral-700/50 rounded-xl">
             <div className="col-span-12 sm:col-span-3">
               <input
                 type="text"
                 placeholder="Food name"
                 value={item.name}
                 onChange={(e) => updateItem(index, 'name', e.target.value)}
-                className="w-full px-2 py-1.5 text-sm border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                className="input text-sm py-2"
               />
             </div>
             <div className="col-span-6 sm:col-span-2">
@@ -129,7 +129,7 @@ const QuickAddMeal = ({ onSave }) => {
                 placeholder="Cal"
                 value={item.calories || ''}
                 onChange={(e) => updateItem(index, 'calories', e.target.value)}
-                className="w-full px-2 py-1.5 text-sm border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                className="input text-sm py-2"
               />
             </div>
             <div className="col-span-6 sm:col-span-2">
@@ -138,7 +138,7 @@ const QuickAddMeal = ({ onSave }) => {
                 placeholder="P (g)"
                 value={item.protein || ''}
                 onChange={(e) => updateItem(index, 'protein', e.target.value)}
-                className="w-full px-2 py-1.5 text-sm border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                className="input text-sm py-2"
               />
             </div>
             <div className="col-span-6 sm:col-span-2">
@@ -147,7 +147,7 @@ const QuickAddMeal = ({ onSave }) => {
                 placeholder="C (g)"
                 value={item.carbs || ''}
                 onChange={(e) => updateItem(index, 'carbs', e.target.value)}
-                className="w-full px-2 py-1.5 text-sm border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                className="input text-sm py-2"
               />
             </div>
             <div className="col-span-5 sm:col-span-2">
@@ -156,13 +156,13 @@ const QuickAddMeal = ({ onSave }) => {
                 placeholder="F (g)"
                 value={item.fats || ''}
                 onChange={(e) => updateItem(index, 'fats', e.target.value)}
-                className="w-full px-2 py-1.5 text-sm border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                className="input text-sm py-2"
               />
             </div>
             <div className="col-span-1">
               <button
                 onClick={() => removeItem(index)}
-                className="w-full p-1.5 text-red-500 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded transition-colors"
+                className="w-full p-2 text-red-500 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-xl transition-all duration-200"
               >
                 <Trash2 className="w-4 h-4" />
               </button>
@@ -171,23 +171,23 @@ const QuickAddMeal = ({ onSave }) => {
         ))}
       </div>
 
-      <div className="bg-gradient-to-r from-orange-500 to-orange-600 dark:from-orange-600 dark:to-orange-700 rounded-lg p-4 mb-6">
+      <div className="bg-gradient-to-r from-primary-500 to-primary-600 rounded-2xl p-6 mb-6 shadow-medium">
         <div className="grid grid-cols-4 gap-4 text-white">
           <div>
-            <p className="text-xs opacity-90">Total Calories</p>
-            <p className="text-2xl font-bold">{totals.calories.toFixed(0)}</p>
+            <p className="text-xs opacity-90 mb-1">Total Calories</p>
+            <p className="text-3xl font-bold">{totals.calories.toFixed(0)}</p>
           </div>
           <div>
-            <p className="text-xs opacity-90">Protein</p>
-            <p className="text-xl font-bold">{totals.protein.toFixed(1)}g</p>
+            <p className="text-xs opacity-90 mb-1">Protein</p>
+            <p className="text-2xl font-bold">{totals.protein.toFixed(1)}g</p>
           </div>
           <div>
-            <p className="text-xs opacity-90">Carbs</p>
-            <p className="text-xl font-bold">{totals.carbs.toFixed(1)}g</p>
+            <p className="text-xs opacity-90 mb-1">Carbs</p>
+            <p className="text-2xl font-bold">{totals.carbs.toFixed(1)}g</p>
           </div>
           <div>
-            <p className="text-xs opacity-90">Fats</p>
-            <p className="text-xl font-bold">{totals.fats.toFixed(1)}g</p>
+            <p className="text-xs opacity-90 mb-1">Fats</p>
+            <p className="text-2xl font-bold">{totals.fats.toFixed(1)}g</p>
           </div>
         </div>
       </div>
@@ -195,7 +195,7 @@ const QuickAddMeal = ({ onSave }) => {
       <button
         onClick={handleSave}
         disabled={saving || totals.calories === 0}
-        className="w-full px-4 py-3 bg-green-600 dark:bg-green-500 text-white rounded-lg hover:bg-green-700 dark:hover:bg-green-600 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+        className="w-full px-4 py-3 bg-green-600 hover:bg-green-700 text-white rounded-xl transition-all duration-200 font-semibold shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 disabled:hover:shadow-md"
       >
         <Save className="w-5 h-5" />
         {saving ? 'Saving...' : 'Save Meal'}
